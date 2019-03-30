@@ -2,13 +2,22 @@ const express = require('express');
 
 const app = express();
 
-app.use((req, res, next) => {
-  console.log('First middleware');
-  next();
-})
+app.use('/api/tasks', (req, res, next) => {
+  const tasks = [
+    {
+      id: 1,
+      title: 'Learn Angular and Node',
+    },
+    {
+      id: 2,
+      title: 'Clean up the room',
+    },
+  ];
 
-app.use((req, res, next) => {
-  res.send('Hello from express!');
-});
+  res.status(200).json({
+    message: 'Tasks fetched successfully!',
+    tasks
+  });
+})
 
 module.exports = app;
